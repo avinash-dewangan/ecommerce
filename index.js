@@ -23,7 +23,7 @@ app.get('/register', (req, res) => {
   try {
     // throw new Error('foo')
     // return res.send('Hello, World!!')
-    return res.render('register.ejs')
+    return res.render('register.ejs', { message: null })
   } catch (error) {
     res.status(500).send('Internal Server Error')
   }
