@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
+    lowercase: true,
     required: [true, 'Email is required'],
     maxlength: [128, 'Name can\'t be grater then 128 charactors'],
     createIndexes: true

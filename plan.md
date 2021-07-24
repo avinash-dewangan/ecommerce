@@ -11,3 +11,8 @@ git log
 for exit use command
 q
 
+Day_10
+validation api
+joi
+https://joi.dev/api/?v=17.4.1
+

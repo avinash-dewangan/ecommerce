@@ -1,0 +1,1 @@
+const SUCCESS = 'Success'

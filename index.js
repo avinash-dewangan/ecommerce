@@ -6,7 +6,6 @@ const app = express()
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 app.set('view engin', 'ejs')
 
 app.use('/', authRoutes)
