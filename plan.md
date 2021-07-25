@@ -17,3 +17,8 @@ joi
 https://joi.dev/api/?v=17.4.1
  npm install joi
 
+day_13
+Editorconfig
+https://github.com/standard/standard/blob/master/.editorconfig
+
+npm i -g editorconfig
