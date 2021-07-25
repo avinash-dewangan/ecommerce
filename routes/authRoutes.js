@@ -4,9 +4,6 @@ const { addUser } = require('../modules/users/services/userServices')
 const { registerSchema } = require('../modules/users/validations/authValidation')
 const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validationFromater')
 
-
-
-
 const m1 = (req, res, next) => {
   req.user = 'Guest'
   next()
