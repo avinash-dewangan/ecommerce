@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
       abortEarly: false
     })
     if (validationResult.error) {
-      return res.render('register.ejs', {
+      return res.render('register', {
         message: {
           type: 'error',
           body: 'Validation Error'
@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
       })
     }
     const user = await addUser(req.body)
-    return res.render('register.ejs', {
+    return res.render('register', {
       message: {
         type: 'success',
         body: 'Registration Success'
@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
     })
   } catch (error) {
     console.error(error)
-    return res.status(400).render('register.ejs', {
+    return res.status(400).render('register', {
       message: {
         type: 'error',
         body: 'Validation Error'
@@ -49,6 +49,27 @@ router.post('/register', async (req, res) => {
       formData: req.body
     })
   }
+})
+
+/**
+ * Show page for user login
+ */
+router.get('/login', (req, res) => {
+  return res.render('login', { message: {}, errors: {}, formData: {} })
+})
+
+/**
+ * logs in a user
+ */
+router.post('/login', (req, res) => {
+  return res.render('login',
+    {
+      message: {
+        type: 'success',
+        body: 'Login Success'
+
+      }, errors: {}, formData: {}
+    })
 })
 
 module.exports = router

@@ -1,4 +1,5 @@
 Registeration Module
+
 - Create a model - user
 - Page for register
 - Save the form to the database
@@ -15,7 +16,7 @@ Day_10
 validation api
 joi
 https://joi.dev/api/?v=17.4.1
- npm install joi
+npm install joi
 
 day_13
 Editorconfig
@@ -27,3 +28,8 @@ day_14
 adding session support to express
 https://www.npmjs.com/package/express-session
 npm i express-session
+
+day_15
+align html line by line
+in setting.json
+"html.format.wrapAttributes": "aligned-multiple"
