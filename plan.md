@@ -22,3 +22,8 @@ Editorconfig
 https://github.com/standard/standard/blob/master/.editorconfig
 
 npm i -g editorconfig
+
+day_14
+adding session support to express
+https://www.npmjs.com/package/express-session
+npm i express-session
