@@ -91,3 +91,6 @@ extend passport with custom callback
 
 day_26
 add 404 page
+
+day_27
+extract config to .env file
