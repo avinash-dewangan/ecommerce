@@ -2,6 +2,8 @@ const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 require('./utils/db.config')
+const passport = require('passport')
+require('./utils/authStratagies/localStratagies')
 const authRoutes = require('./routes/authRoutes')
 const app = express()
 
@@ -15,13 +17,15 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-
+app.use(passport.initialize())
+app.use(passport.session())
 app.use('/', authRoutes)
 
 app.get('/', (req, res) => {
   try {
     req.session.views = (req.session.views || 0) + 1
     console.log(`You have visited ${req.session.views} times`)
+    console.log('User: ', req.user)
     return res.render('index')
   } catch (error) {
     res.status(500).send('Internal Server Error')

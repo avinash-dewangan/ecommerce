@@ -1,3 +1,19 @@
+A pratical NodeJs Project
+an multivender ecommerce webstite
+
+-MongoDB
+-ES6, ES7 syntax
+-Best practice
+-Focus on performance
+-Modularity
+-Other services: S3, Stripe
+-SEO
+-Linting
+-git
+-unit testing
+
+-express, mongoose, aws-sdk, stripe, eslint, passport, joi, chai, mocha
+
 Registeration Module
 
 - Create a model - user
@@ -36,3 +52,9 @@ in setting.json
 
 day_16
 conecept of middleware
+
+day_17
+login using passport
+http://www.passportjs.org/
+npm i passport passport-local
+for example npm i passport passport-facebook

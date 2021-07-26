@@ -3,15 +3,7 @@ const router = express.Router()
 const { addUser } = require('../modules/users/services/userServices')
 const { registerSchema } = require('../modules/users/validations/authValidation')
 const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validationFromater')
-
-const m1 = (req, res, next) => {
-  req.user = 'Guest'
-  next()
-}
-const m2 = (req, res, next) => {
-  console.log(req.url)
-  next()
-}
+const passport = require('passport')
 
 /**
  * Show page for user registration
@@ -70,7 +62,13 @@ router.get('/login', (req, res) => {
 /**
  * logs in a user
  */
-router.post('/login', m1, m2, (req, res) => {
+router.post('/login', passport.authenticate('local',
+  {
+    successRedirect: '/login-success',
+    failureRedirect: '/login-failed'
+    // failureFlash: true
+  }
+), (req, res) => {
   console.log(req.user)
   return res.render('login',
     {
