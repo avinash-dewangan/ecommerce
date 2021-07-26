@@ -6,11 +6,13 @@ const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validati
 const passport = require('passport')
 const guestMiddleware = require('../middleware/guestMiddlewares')
 const authMiddleware = require('../middleware/authMiddlewares')
+const flasherMiddlewares = require('../middleware/flasherMiddlewares')
+
 
 /**
  * Show page for user registration
  */
-router.get('/register', guestMiddleware, (req, res) => {
+router.get('/register', guestMiddleware, flasherMiddlewares, (req, res) => {
   return res.render('register' /* , { message: {}, errors: {}, formData: {} } */)
 })
 
@@ -23,24 +25,26 @@ router.post('/register', guestMiddleware, async (req, res) => {
       abortEarly: false
     })
     if (validationResult.error) {
-      return res.render('register', {
+      req.session.flashData = {
         message: {
           type: 'error',
           body: 'Validation Error'
         },
         errors: joiErrorFormatter(validationResult.error),
         formData: req.body
-      })
+      }
+      return res.redirect('/register')
     }
     const user = await addUser(req.body)
-    return res.render('register', {
+    req.session.flashData = {
       message: {
         type: 'success',
         body: 'Registration Success'
       },
       // errors: {}, // for common to all configure index.js
       formData: req.body
-    })
+    }
+    return res.redirect('register')
   } catch (error) {
     console.error(error)
     return res.status(400).render('register', {

@@ -14,6 +14,11 @@ an multivender ecommerce webstite
 
 -express, mongoose, aws-sdk, stripe, eslint, passport, joi, chai, mocha
 
+Third Party Software uses
+Undraw for image
+
+======================================
+
 Registeration Module
 
 - Create a model - user
@@ -77,3 +82,6 @@ Only pass required data to views
 
 day_23
 Add Logout Option
+
+day_24
+Redirect without losing request data

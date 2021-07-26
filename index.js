@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const logger = require('morgan')
 
 require('./utils/db.config')
 const MongoStore = require('connect-mongo')
@@ -27,6 +28,9 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// logger console in server terminal
+app.use(logger('dev'))
 
 // This for view repetative variable every routes for command to call
 console.log('App locals', app.locals)
