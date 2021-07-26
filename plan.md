@@ -74,3 +74,6 @@ check user password
 
 day_22
 Only pass required data to views
+
+day_23
+Add Logout Option

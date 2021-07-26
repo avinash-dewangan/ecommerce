@@ -5,6 +5,7 @@ const { registerSchema } = require('../modules/users/validations/authValidation'
 const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validationFromater')
 const passport = require('passport')
 const guestMiddleware = require('../middleware/guestMiddlewares')
+const authMiddleware = require('../middleware/authMiddlewares')
 
 /**
  * Show page for user registration
@@ -37,7 +38,7 @@ router.post('/register', guestMiddleware, async (req, res) => {
         type: 'success',
         body: 'Registration Success'
       },
-      //errors: {}, // for common to all configure index.js
+      // errors: {}, // for common to all configure index.js
       formData: req.body
     })
   } catch (error) {
@@ -80,5 +81,13 @@ router.post('/login',
         // formData: {}
       })
   })
+
+/**
+ * Logout a user
+ */
+router.get('/logout', authMiddleware, (req, res) => {
+  req.logout()
+  res.redirect('/')
+})
 
 module.exports = router
