@@ -18,6 +18,10 @@ const app = express()
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
+
+
+
+
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: '63d3d020211add69b30eda68f72afcad4a05f295',
@@ -26,6 +30,11 @@ app.use(session({
   cookie: { secure: false },
   store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/myshop' })
 }))
+
+// static file serve
+app.use(express.static('public'))
+
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -50,6 +59,11 @@ app.get('/', (req, res) => {
 })
 app.get('/homepage', authMiddlware, (req, res) => {
   res.send(`Welecome ${req.user.name}`)
+})
+
+// make sure create 404 middleware after all routes
+app.use((req, res, next) => {
+  res.status(404).render('404')
 })
 
 app.listen(3000, () => {

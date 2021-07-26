@@ -89,7 +89,6 @@ router.post('/login',
             body: info.error
           }
         }
-        console.log('hellow 2')
         return res.redirect('/login')
       }
       req.logIn(user, (err) => {
@@ -102,8 +101,7 @@ router.post('/login',
             }
           }
         }
-        console.log('hellow 3')
-        return res.redirect('/homepage/')
+        return res.redirect('/homepage')
       })
     })(req, res, next)
   }

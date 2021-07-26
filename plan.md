@@ -88,3 +88,6 @@ Redirect without losing request data
 
 day_25
 extend passport with custom callback
+
+day_26
+add 404 page
