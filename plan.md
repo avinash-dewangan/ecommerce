@@ -94,3 +94,6 @@ add 404 page
 
 day_27
 extract config to .env file
+
+day_28
+Unique Email Validation Using

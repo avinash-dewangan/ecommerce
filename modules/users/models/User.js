@@ -31,6 +31,19 @@ const userSchema = mongoose.Schema({
   timestamps: true
 })
 
+/***
+ * validate unique email
+ */
+userSchema.path('email').validate(async (email) => {
+  const emailCount = await mongoose.models.user.countDocuments({
+    email
+  })
+  return !emailCount
+}, 'Email already exist')
+
+/**
+ * Encryptes password if value is change
+ */
 userSchema.pre('save', async function (next) {
   // do stuff
   if (!this.isModified('password')) next()
@@ -38,6 +51,7 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10)
   next()
 })
+
 userSchema.methods.checkPassword = async function (password) {
   // if (password != null && this.password != null) {
   console.log('insidelocal straties', password, this.password)
