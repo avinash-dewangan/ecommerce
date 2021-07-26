@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -38,6 +38,13 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10)
   next()
 })
+userSchema.methods.checkPassword = async function (password) {
+  // if (password != null && this.password != null) {
+  console.log('insidelocal straties', password, this.password)
+  const result = await bcrypt.compare(password, this.password)
+  return result
+  // }
+}
 
 const User = mongoose.model('user', userSchema)
 module.exports = User

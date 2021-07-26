@@ -63,23 +63,21 @@ router.get('/login', guestMiddleware, (req, res) => {
 /**
  * logs in a user
  */
-router.post('/login', guestMiddleware, passport.authenticate('local',
-  {
+router.post('/login',
+  guestMiddleware,
+  passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login'
-    // failureFlash: true
-  }
-), (req, res) => {
-  console.log(req.user)
-  return res.render('login',
-    {
-      message: {
-        type: 'success',
-        body: 'Login Success'
-      },
-      errors: {},
-      formData: {}
-    })
-})
+  }), (req, res) => {
+    return res.render('login',
+      {
+        message: {
+          type: 'success',
+          body: 'Login Success'
+        },
+        errors: {},
+        formData: {}
+      })
+  })
 
 module.exports = router
