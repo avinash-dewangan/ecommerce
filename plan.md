@@ -71,3 +71,6 @@ add auth middlewares
 
 day_21
 check user password
+
+day_22
+Only pass required data to views

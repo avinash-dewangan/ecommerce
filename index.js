@@ -27,6 +27,13 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// This for view repetative variable every routes for command to call
+console.log('App locals', app.locals)
+app.locals.message = {}
+app.locals.errors = {}
+app.locals.formData = {}
+
 app.use('/', authRoutes)
 
 app.get('/', (req, res) => {

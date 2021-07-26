@@ -10,7 +10,7 @@ const guestMiddleware = require('../middleware/guestMiddlewares')
  * Show page for user registration
  */
 router.get('/register', guestMiddleware, (req, res) => {
-  return res.render('register.ejs', { message: {}, errors: {}, formData: {} })
+  return res.render('register' /* , { message: {}, errors: {}, formData: {} } */)
 })
 
 /**
@@ -37,7 +37,7 @@ router.post('/register', guestMiddleware, async (req, res) => {
         type: 'success',
         body: 'Registration Success'
       },
-      errors: {},
+      //errors: {}, // for common to all configure index.js
       formData: req.body
     })
   } catch (error) {
@@ -57,7 +57,7 @@ router.post('/register', guestMiddleware, async (req, res) => {
  * Show page for user login
  */
 router.get('/login', guestMiddleware, (req, res) => {
-  return res.render('login', { message: {}, errors: {}, formData: {} })
+  return res.render('login' /* , { message: {}, errors: {}, formData: {} } */)
 })
 
 /**
@@ -74,9 +74,10 @@ router.post('/login',
         message: {
           type: 'success',
           body: 'Login Success'
-        },
-        errors: {},
-        formData: {}
+        }
+        //,
+        // errors: {},    //configure in index.js
+        // formData: {}
       })
   })
 
