@@ -7,15 +7,11 @@ passport.use(new LocalStrategy({ usernameField: 'email' },
     try {
       const user = await User.findOne({ email })
 
-      if (!user) done(null, false)
-      //console.log(password)
-      const result = await user.checkPassword(password)
-
-
-
-      if (result) return done(null, user)
-
-      done(null, false)
+      if (!user) done(null, false, { error: 'Incorrect username.' })
+      // console.log(password)
+      // const result =
+      if (await user.checkPassword(password)) done(null, user)
+      done(null, false, { error: 'Incorrect password.' })
     } catch (error) {
       done(error)
     }

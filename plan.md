@@ -85,3 +85,6 @@ Add Logout Option
 
 day_24
 Redirect without losing request data
+
+day_25
+extend passport with custom callback

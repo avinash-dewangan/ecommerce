@@ -8,7 +8,6 @@ const guestMiddleware = require('../middleware/guestMiddlewares')
 const authMiddleware = require('../middleware/authMiddlewares')
 const flasherMiddlewares = require('../middleware/flasherMiddlewares')
 
-
 /**
  * Show page for user registration
  */
@@ -61,7 +60,7 @@ router.post('/register', guestMiddleware, async (req, res) => {
 /**
  * Show page for user login
  */
-router.get('/login', guestMiddleware, (req, res) => {
+router.get('/login', guestMiddleware, flasherMiddlewares, (req, res) => {
   return res.render('login' /* , { message: {}, errors: {}, formData: {} } */)
 })
 
@@ -70,21 +69,45 @@ router.get('/login', guestMiddleware, (req, res) => {
  */
 router.post('/login',
   guestMiddleware,
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }), (req, res) => {
-    return res.render('login',
-      {
-        message: {
-          type: 'success',
-          body: 'Login Success'
+  (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) {
+        console.error('Err:', err)
+        req.session.flashData = {
+          message: {
+            type: 'error',
+            body: 'Login Failed'
+          }
         }
-        //,
-        // errors: {},    //configure in index.js
-        // formData: {}
+        return res.redirect('/login')
+      }
+      if (!user) {
+        console.error('User:', user)
+        req.session.flashData = {
+          message: {
+            type: 'error',
+            body: info.error
+          }
+        }
+        console.log('hellow 2')
+        return res.redirect('/login')
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          console.error('Err:', err)
+          req.session.flashData = {
+            message: {
+              type: 'error',
+              body: 'Login Failed'
+            }
+          }
+        }
+        console.log('hellow 3')
+        return res.redirect('/homepage/')
       })
-  })
+    })(req, res, next)
+  }
+)
 
 /**
  * Logout a user
