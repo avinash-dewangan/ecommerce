@@ -58,3 +58,10 @@ login using passport
 http://www.passportjs.org/
 npm i passport passport-local
 for example npm i passport passport-facebook
+
+day_18
+login using passport
+
+day_19
+save session in the database for session persistence
+npm i connect-mongo
