@@ -65,3 +65,6 @@ login using passport
 day_19
 save session in the database for session persistence
 npm i connect-mongo
+
+day_20
+add auth middlewares

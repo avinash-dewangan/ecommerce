@@ -8,6 +8,8 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 require('./utils/authStratagies/localStratagies')
 
+const authMiddlware = require('./middleware/authMiddlewares')
+
 const authRoutes = require('./routes/authRoutes')
 
 const app = express()
@@ -34,6 +36,9 @@ app.get('/', (req, res) => {
   } catch (error) {
     res.status(500).send('Internal Server Error')
   }
+})
+app.get('/homepage', authMiddlware, (req, res) => {
+  res.send(`Welecome ${req.user.name}`)
 })
 
 app.listen(3000, () => {
