@@ -48,7 +48,7 @@ app.use(passport.session())
 app.use(logger('dev'))
 
 // This for view repetative variable every routes for command to call
-console.log('App locals', app.locals)
+// console.log('App locals', app.locals)
 app.locals.message = {}
 app.locals.errors = {}
 app.locals.formData = {}
@@ -57,7 +57,7 @@ app.use('/', authRoutes)
 
 app.get('/', (req, res) => {
   try {
-    console.log('User: ', req.user)
+    // console.log('User: ', req.user)
     return res.render('index')
   } catch (error) {
     res.status(500).send('Internal Server Error')

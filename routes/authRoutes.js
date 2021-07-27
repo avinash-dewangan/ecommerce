@@ -86,7 +86,7 @@ router.post('/login',
         req.session.flashData = {
           message: {
             type: 'error',
-            body: info.error
+            body: info.message
           }
         }
         return res.redirect('/login')
