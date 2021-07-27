@@ -12,9 +12,10 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 require('./utils/authStratagies/localStratagies')
 
-const authMiddlware = require('./middleware/authMiddlewares')
+const { authMiddlware, flasherMiddleware } = require('./middleware')
 
 const authRoutes = require('./routes/authRoutes')
+
 
 const app = express()
 
@@ -24,9 +25,6 @@ const config = require('./utils/config')
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
-
-
-
 
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -40,12 +38,19 @@ app.use(session({
 // static file serve
 app.use(express.static('public'))
 
-
 app.use(passport.initialize())
 app.use(passport.session())
 
 // logger console in server terminal
 app.use(logger('dev'))
+
+/**
+ * Globel middleware to make logged in user avilable to the views
+ */
+app.use((req, res, next) => {
+  res.locals.user = (req.isAuthenticated()) ? req.user : null
+  return next()
+})
 
 // This for view repetative variable every routes for command to call
 // console.log('App locals', app.locals)
@@ -55,7 +60,7 @@ app.locals.formData = {}
 
 app.use('/', authRoutes)
 
-app.get('/', (req, res) => {
+app.get('/', flasherMiddleware, (req, res) => {
   try {
     // console.log('User: ', req.user)
     return res.render('index')

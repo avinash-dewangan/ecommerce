@@ -100,3 +100,9 @@ Unique Email Validation Using
 
 day_29
 automated testing in express
+
+day_30
+add admin panel
+
+day_31
+access logged in user to views

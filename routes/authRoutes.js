@@ -15,6 +15,18 @@ router.get('/register', guestMiddleware, flasherMiddlewares, (req, res) => {
   return res.render('register' /* , { message: {}, errors: {}, formData: {} } */)
 })
 
+// resusable method for flash data messanger
+const flashDataMessanger = (req, res, type, body, errors = null, formData = null) => {
+  req.session.flashData = {
+    message: {
+      type: type,
+      body: body
+    },
+    errors: errors,
+    formData: formData
+  }
+}
+
 /**
  * handle user registration
  */
@@ -111,6 +123,7 @@ router.post('/login',
  * Logout a user
  */
 router.get('/logout', authMiddleware, (req, res) => {
+  flashDataMessanger(req, res, 'success', 'Logout Sucessfully')
   req.logout()
   res.redirect('/')
 })

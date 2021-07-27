@@ -20,7 +20,16 @@
       </div>
       <div class="info">
         <a href="#"
-           class="d-block">Alexander Pierce</a>
+           class="d-block">
+          <% if
+             (user)
+             {
+             %>
+            <%= user.name
+                %>
+              <% }
+                 %>
+        </a>
       </div>
     </div>
 
