@@ -64,7 +64,8 @@ app.get('/', (req, res) => {
   }
 })
 app.get('/homepage', authMiddlware, (req, res) => {
-  res.send(`Welecome ${req.user.name}`)
+  // res.send(`Welecome ${req.user.name}`)
+  res.render('dashboard')
 })
 
 // make sure create 404 middleware after all routes
